@@ -6,7 +6,7 @@ import threading
 setup_db()
 
 def main():
-    schedule.every().day.at("03:36").do(send_updates)
+    schedule.every().day.at("03:39").do(send_updates)
     
     print("Scheduler is set")
 
@@ -17,13 +17,10 @@ def main():
 def run_bot():
     bot.polling()
     
-
-scheduler_thread = threading.Thread(target=main)
-scheduler_thread.start()
-print("Scheduler is running")
-
+# Run the bot polling in a separate thread
+bot_thread = threading.Thread(target=run_bot)
+bot_thread.start()
 print("Bot is running")
-bot.polling()
 
-
-
+# Run the scheduler in the main thread
+main()
