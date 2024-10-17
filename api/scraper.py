@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
 
-URL = 'https://dataportal-api.nordpoolgroup.com/api/DayAheadPrices?date=2024-10-17&market=DayAhead&deliveryArea=AT,SE3&currency=SEK'
+URL = f'https://dataportal-api.nordpoolgroup.com/api/DayAheadPrices?date={(datetime.today() + pd.Timedelta(days = 1)).strftime('%Y-%m-%d')}&market=DayAhead&deliveryArea=AT,SE3&currency=SEK'
 
 def create_plot():
     response = requests.get(URL)
     data = response.json()
-
+    
     entries = []
 
     for entry in data['multiAreaEntries']:
