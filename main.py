@@ -17,7 +17,7 @@ def main():
         time.sleep(1)
         
 def run_bot():
-    bot.polling()
+    bot.infinity_polling()
     
 # Run the bot polling in a separate thread
 bot_thread = threading.Thread(target=run_bot)
