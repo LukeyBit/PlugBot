@@ -6,7 +6,7 @@ import threading
 setup_db()
 
 def main():
-    schedule.every().day.at("03:39").do(send_updates)
+    schedule.every().day.at("18:00").do(send_updates)
     
     print("Scheduler is set")
 
