@@ -42,9 +42,9 @@ def create_plot():
 
     plt.axvline(x=df.index[2], color='gray', linestyle='--')
 
-    plt.text(df.index[0] + pd.Timedelta(minutes=30), plt.ylim()[0] - 8, df.index[0].strftime('%Y-%m-%d'), verticalalignment='bottom', horizontalalignment='center', fontsize=12)
+    plt.text(df.index[0] + pd.Timedelta(minutes=30), plt.ylim()[0], df.index[0].strftime('%Y-%m-%d'), verticalalignment='bottom', horizontalalignment='center', fontsize=12)
 
-    plt.text(df.index[3] + pd.Timedelta(minutes=30), plt.ylim()[0] - 8, df.index[3].strftime('%Y-%m-%d'), verticalalignment='bottom', horizontalalignment='center', fontsize=12)
+    plt.text(df.index[3] + pd.Timedelta(minutes=30), plt.ylim()[0], df.index[3].strftime('%Y-%m-%d'), verticalalignment='bottom', horizontalalignment='center', fontsize=12)
 
     plt.legend()
 
