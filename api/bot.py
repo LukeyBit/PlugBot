@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from .scraper import create_plot
 import os
 import telebot
 from psycopg2 import connect
@@ -19,7 +20,7 @@ def get_connection():
 def setup_db():
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS users (id PRIMARY KEY)')
+    cursor.execute('CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY)')
     conn.commit()
     cursor.close()
     conn.close()
@@ -62,6 +63,7 @@ def unsubscribe(message):
     bot.reply_to(message, 'You have been unsubscribed from daily electricity price updates for SE3.')
     
 def send_updates():
+    create_plot()
     users = get_users()
     for user in users:
         bot.send_photo(user, open('prices.png', 'rb'))
