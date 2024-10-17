@@ -28,7 +28,12 @@ def setup_db():
 def add_user(user_id):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO users (id) VALUES (%s)', (user_id,))
+    
+    try:
+        cursor.execute('INSERT INTO users (id) VALUES (%s)', (user_id,))
+    except:
+        pass
+    
     conn.commit()
     cursor.close()
     conn.close()
@@ -36,7 +41,12 @@ def add_user(user_id):
 def remove_user(user_id):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute('DELETE FROM users WHERE id = %s', (user_id,))
+    
+    try:
+        cursor.execute('DELETE FROM users WHERE id = %s', (user_id,))
+    except:
+        pass
+    
     conn.commit()
     cursor.close()
     conn.close()
@@ -63,8 +73,11 @@ def unsubscribe(message):
     bot.reply_to(message, 'You have been unsubscribed from daily electricity price updates for SE3.')
     
 def send_updates():
+    print('Creating plot...')
     create_plot()
+    print('Sending updates...')
     users = get_users()
     for user in users:
         bot.send_photo(user, open('prices.png', 'rb'))
         bot.send_message(user, 'Here are the latest electricity prices for SE3.')
+    print('Updates sent!')
