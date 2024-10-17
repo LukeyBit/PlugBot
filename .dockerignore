@@ -24,3 +24,9 @@ __pycache__/
 .env
 
 .git/
+
+# Ignore the Dockerfile
+Dockerfile
+
+# Ignore image files
+*.png
