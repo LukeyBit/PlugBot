@@ -4,22 +4,25 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
 
-URL = f'https://dataportal-api.nordpoolgroup.com/api/DayAheadPrices?date={(datetime.today() + pd.Timedelta(days = 1)).strftime('%Y-%m-%d')}&market=DayAhead&deliveryArea=AT,SE3&currency=SEK'
-
-def create_plot():
+def get_prices():
+    URL = f'https://dataportal-api.nordpoolgroup.com/api/DayAheadPrices?date={(datetime.today() + pd.Timedelta(days = 1)).strftime("%Y-%m-%d")}&market=DayAhead&deliveryArea=AT,SE3&currency=SEK'
+    
     response = requests.get(URL)
     data = response.json()
     
     entries = []
 
     for entry in data['multiAreaEntries']:
-        datetime = pd.to_datetime(f'{entry["deliveryStart"].split("T")[0]} {entry["deliveryStart"].split("T")[1][:-1]}')
+        entry_datetime = pd.to_datetime(f'{entry["deliveryStart"].split("T")[0]} {entry["deliveryStart"].split("T")[1][:-1]}')
         price = entry['entryPerArea']['SE3']
-        entries.append({'datetime': datetime, 'price': price})
+        entries.append({'datetime': entry_datetime, 'price': price})
 
-    entries.append({'datetime': entries[-1]['datetime'] + pd.Timedelta(hours=1), 'price': entries[-1]['price']}) 
+    entries.append({'datetime': entries[-1]['datetime'] + pd.Timedelta(hours=1), 'price': entries[-1]['price']})
+    return entries
+    
 
-    df = pd.DataFrame(entries)
+def create_plot():
+    df = pd.DataFrame(get_prices())
     df = df.set_index('datetime')
 
     plt.figure(figsize=(20, 10))
