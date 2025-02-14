@@ -9,9 +9,9 @@ The bot collects the electricity prices from Nordpool's API and creates a graph 
 The bot can be run on any machine supporting Python and/or Docker. The Docker images can be found on Docker Hub (link below).
 
 ### Running with Docker
-Use the build the image with the environment variables `DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT` being set to the correct information for your database. Alternatively use docker compose.
+Use the build the image with the environment variables `BOT_TOKEN, DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT` being set to the correct information for your database. Alternatively use docker compose.
 
 [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)](https://hub.docker.com/r/lukeybit/plugbot/)
 
 ### Running without Docker
-To run the bot without Docker, simply clone the project, create a `.env` file containing the `DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT` variables, and run the `main.py` file at the root of the project.
+To run the bot without Docker, simply clone the project, create a `.env` file containing the `BOT_TOKEN, DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT` variables, and run the `main.py` file at the root of the project.
